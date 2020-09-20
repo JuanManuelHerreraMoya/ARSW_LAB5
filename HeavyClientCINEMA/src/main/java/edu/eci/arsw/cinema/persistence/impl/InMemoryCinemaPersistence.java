@@ -34,7 +34,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
         List<CinemaFunction> functions= new ArrayList<>();
         List<CinemaFunction> functions2= new ArrayList<>();
         List<CinemaFunction> functions3= new ArrayList<>();
-        CinemaFunction funct1 = new CinemaFunction(new Movie("SuperHeroes Movie","Action"),functionDate);
+        CinemaFunction funct1 = new CinemaFunction(new Movie("SuperHeroes Movie","Actio"),functionDate);
         CinemaFunction funct2 = new CinemaFunction(new Movie("The Night","Horror"),functionDate);
         functionDate = "2018-12-18 20:30";
         CinemaFunction funct3 = new CinemaFunction(new Movie("Pinocho","Childish"),functionDate);

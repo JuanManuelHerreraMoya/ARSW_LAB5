@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Cinema bookings</title>
     <meta charset="UTF-8">
-    <title>CinemaClient</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="js/apimock.js"></script>
+    <script src="js/app.js"></script>
+
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        th, td {
+          padding: 5px;
+          text-align: left;
+        }
+    </style>
 </head>
 <body>
     <h1>Cinemas Booking</h1></br>
-    <h2>Cinema</h2>
-    <form ID="GCBNAD">
-        <label>Nombre Cinema: <input type="text"></label>
-        <label>Fecha: <input type="text"></label>
-        <input type="button" document.getelementbyid="GCBNAD" value="Get Funtions">
+    <form id="datosCinema">
+        <label>Cinema </label>
+        <input type="text" id="nombreC" name="nombreCinema" value="cinemaX" />
+        <input type="date" id="fechaC" name="fechaCinema" value=""/>
+        <input type="submit" value="Get Functions"><br><br><br>
+
+        <label>Cinema selected:</label><br>
+        <label>Movies:</label><br>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Genre</th>
+                <th>Hour</th>
+                <th>Availability</th>
+            </tr>
+        </table>
     </form>
+
+
 </body>
 </html>
 
