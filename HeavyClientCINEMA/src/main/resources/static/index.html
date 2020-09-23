@@ -30,12 +30,13 @@
     <h1>Cinemas Booking</h1></br>
     <form id="datosCinema">
         <label>Cinema </label>
-        <input type="text" id="nombreC" name="nombreCinema" value="cinemaX" />
-        <input type="date" id="fechaC" name="fechaCinema" value=""/>
-        <input type="submit" value="Get Functions"><br><br><br>
+        <input type="text" id="nombreC" name="nombreCinema" value="" />
+        <input type="text" id="fechaC" name="fechaCinema" value=""/>
+        <button type="button" onclick="app.setCinema(document.getElementById('nombreC').value)" > Get functions</button>
+        <br><br><br>
 
-        <label>Cinema selected:</label><br>
-        <label>Movies:</label><br>
+        <h2 id="CinemaS"></h2>
+
         <table>
             <tr>
                 <th>Name</th>
