@@ -1,7 +1,7 @@
 
 apimock = (function () {
 
-    var seats = [[true, true, true, true, true, true, true, true, true, true, true, true], [true, true, true, true, true, true, true, true, true, true, true, true], [true, true, true, true, true, true, true, true, true, true, true, true], [true, true, true, true, true, true, true, true, true, true, true, true], [true, true, true, true, true, true, true, true, true, true, true, true], [true, true, true, true, true, true, true, true, true, true, true, true], [true, true, true, true, true, true, true, true, true, true, true, true]];
+    var seats = [[false, false, false, true, false, true, true, true, true, true, true, true], [true, true, true, true, true, true, true, true, false, false, true, true], [true, true, true, true, true, false, true, true, true, true, true, true], [true, true, true, true, false, true, true, true, false, true, true, true], [true, true, true, true, true, true, false, true, false, true, true, true], [true, true, true, true, true, false, false, false, true, true, true, true], [true, true, true, true, true, true, false, false, true, true, true, true]];
     var mockdata = [];
     var function1Y = {"movie": {"name": "SuperHeroes Movie", "genre": "Action"}, "seats": seats, "date": "2018-12-19 17:00"};
     var function2Y = {"movie": {"name": "The Night", "genre": "Horror"}, "seats": seats, "date": "2018-12-19 19:40"};
@@ -35,7 +35,7 @@ apimock = (function () {
 /*
  Example of use:
  var fun=function(list){
- console.log(list);
+ console.log("listo"");
  }
  apimock.getFunctionsByCinema("cinemaX",fun);
  apimock.getFunctionsByCinemaAndDate("cinemaX","2018-12-18",fun);*/

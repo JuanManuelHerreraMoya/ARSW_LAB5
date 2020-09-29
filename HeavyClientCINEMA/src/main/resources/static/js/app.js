@@ -1,70 +1,107 @@
 var app = (function () {
 
+  var cinemaName;
+  var functionDate;
+  var functionCinema;
+  var originalFunctions;
+  var seats;
+  var modulo = appiclient;
 
-    return {
-        setCinema: function (cinema) {
-            document.getElementById("CinemaS").innerHTML = "Cinema selected: " + cinema;
-        },
-        getCinemas: function (cinema,fecha) {
-            app.setCinema(cinema);
-            var fn = apimock.getFunctionsByCinemaAndDate(fecha,cinema, null)
+  function _setCinemaName(cinema){
+       cinemaName = cinema;
+  }
 
+  function _setFunctionDate (date){
+    functionDate = date;
+  }
+
+  function _setDateToHour(cinema){
+    return {name: cinema.movie.name, genre: cinema.movie.genre, hour: cinema.date.substring(11, 16)};
+  }
+
+  function getFunctionsByCinemaAndDate(){
+    _setCinemaName($("#nameC").val());
+    _setFunctionDate($("#dateC").val());
+    //apimock.getFunctionsByCinemaAndDate(cinemaName, functionDate, _prettyPrint);
+    modulo.getFunctionsByCinemaAndDate(cinemaName, functionDate, _prettyPrint);
+  }
+
+  function _prettyPrint(list){
+    var table = $("#table1");
+    var body = $("tbody");
+    originalFunctions = list;
+    functionCinema = list.map(_setDateToHour);
+    $("#CinemaS").text("Cinema Selected: "+ cinemaName);
+    $("#Movie").text("Movies:");
+    body.remove();
+    table.append("<tbody>");
+    var newBody = $("tbody");
+    newBody.append(functionCinema.map(_print));
+    table.append(newBody);
+    table.append("</tbody>");
+    $("#Ava").text("Availability of: ");
+    _resetCanvas();
+  }
+
+  function _print(res){
+    var dateTime =  "".concat(functionDate, " ", res.hour);
+    var boton = "<button type='button' onclick='app.getSeatsByFunction(\"" + res.name + '" , "' + dateTime + "\")' > Open Seats</button>"
+    var temp = '<tr><td>' + res.name + '</td><td>' + res.genre + '</td><td>' + res.hour + '</td><td>' + boton + '</td></tr>';
+    return temp;
+  }
+
+
+  function getSeatsByFunction(name, dateTime){
+    originalFunctions.forEach(function(cinema) {
+        if(cinema.movie.name===name  && cinema.date===dateTime){
+            seats = cinema.seats;
         }
-    };
-
-})();
-/*var app = (function () {
-
-  var nombreCinema;
-  var fechaFunciones;
-  var funcionesCinema;
-  var module = "js/apimock.js";
-
-
-  function setNombreCinema(cinema){
-       nombreCinema = cinema;
+    });
+    _drawSeats(name);
   }
 
-  function setFechaFuncion (date){
-    fechaFunciones = date.substring(0, 10);;
+  function _drawSeats(name){
+    $("#Ava").text("Availability of: "+name);
+    _resetCanvas();
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.font = "30px Arial";
+    ctx.fillText("Screen", 140, 30);
+    ctx.translate(20,50);
+
+    for (var i = 0; i < seats.length; i++) {
+        for (var j = 0; j < seats[0].length; j++) {
+            if( !seats[i][j] ){
+                ctx.fillStyle = "#ba0b0b";
+            }else{
+                ctx.fillStyle = "#61659b";
+            }
+            ctx.fillRect(j*30, i*30, 20, 20);
+        }
+    }
   }
+
+  function _resetCanvas(){
+    var c = document.getElementById("myCanvas");
+    c.width = c.width;
+    var ctx = c.getContext("2d");
+    ctx.clearRect(0, 0,  c.width, c.height);
+  }
+
+  function removeFunction(funct){
+          clearCanvasSeats();
+          $.getScript(module, function () {
+              api.deleteFunction(cinema, funct, refreshFunctionsData);
+          });
+      }
 
   return {
-    setNombreCinema: setNombreCinema,
-    setFechaFuncion: setNombreCinema
+        //saveAndUpdate:saveAndUpdate,
+        //createFunction:createFunction,
+        //deleteFunction:deleteFunction,
+        getFunctionsByCinemaAndDate: getFunctionsByCinemaAndDate,
+        getSeatsByFunction: getSeatsByFunction
+
   };
 
-  function getFunctionsByCinemaAndDate(cinema, date){
-    console.log(cinema);
-    console.log(date);
-    apimock.getFunctionsByCinemaAndDate(cinema,date,callB);
-    }
-    function callB(functions){
-        funcionesCinema= [];
-        functions.map(function(funct){
-            funcionesCinema.push({
-            name: funct.movie.name,
-            genre: funct.movie.genre,
-            hour: fun.date.split(" ")[1]});
-        })
-        updateTable();
-    }
-    function updateTable(){
-        for (i=0;i<funcionesCinema.length;i++){
-            console.log(funcionesCinema[i]);
-            $("#idTable > tbody").append(
-                '<tr><tr>' + funcionesCinema[i].name +'</tr>'+
-                '<tr>' + funcionesCinema[i].genre +'</tr>' +
-                '<tr>' + funcionesCinema[i].hour +'</tr>' +
-                '<tr>' + "available" +'</tr></tr>');
-        }
-    }
-    return{
-        getFunctionsByCinemaNameAndDate:function (cinema,date){
-            setNombreCinema(cinema);
-            setFechaFuncion(date);
-            getFunctionsByCinemaAndDate(cinema,date);
-
-        }
-    }
-})();*/
+})();

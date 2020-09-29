@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <title>Cinema bookings</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,10 @@
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script src="js/apimock.js"></script>
+    <script src="js/appiclient.js"></script>
     <script src="js/app.js"></script>
-
     <link rel="stylesheet"
           href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-
 
     <style>
         table, th, td {
@@ -25,28 +25,60 @@
           text-align: left;
         }
     </style>
+
 </head>
+
 <body>
+<div>
     <h1>Cinemas Booking</h1></br>
-    <form id="datosCinema">
+    <form id="inputData">
         <label>Cinema </label>
-        <input type="text" id="nombreC" name="nombreCinema" value="" />
-        <input type="text" id="fechaC" name="fechaCinema" value=""/>
-        <button type="button" onclick="app.setCinema(document.getElementById('nombreC').value)" > Get functions</button>
-        <br><br><br>
-
-        <h2 id="CinemaS"></h2>
-
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Genre</th>
-                <th>Hour</th>
-                <th>Availability</th>
-            </tr>
-        </table>
+        <input type="text" id="nameC"  value="cinemaX" />
+        <input type="date" id="dateC" value="2018-12-18" />
+        <button type="button" onclick="app.getFunctionsByCinemaAndDate()" > Get functions</button>
+        <br><br>
     </form>
 
+
+    <form id="tables">
+        <h4 id="CinemaS"></h4>
+        <h4 id="Movie"></h4>
+
+        <table id="table1">
+            <thead id="thea1">
+                <tr>
+                    <th>Name</th>
+                    <th>Genre</th>
+                    <th>Hour</th>
+                    <th>Availability</th>
+                </tr>
+            </thead>
+            <tbody id="tbody1">
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <br><br>
+
+    <form id="canvas">
+        <h4 id="Ava"></h4>
+        <canvas id="myCanvas" width="400" height="300" style="border:1px solid #000000;" />
+    </form>
+</div>
+
+<div>
+    <h3>Administrator Mode</h3></br>
+    <form id="administrador">
+        <label>Edit Function </label>
+        <input type="text" id="newDateHoure"  value="2018-12-18 17:30" />
+        <button type="button" onclick="app.saveAndUpdate()" >Save/Update</button>
+        <br><br>
+        <button type="button" onclick="app.createFunction()" >Create New Function</button>
+        <button type="button" onclick="app.deleteFunction()" >Delet Function</button>
+        <br><br>
+    </form>
+</div>
 
 </body>
 </html>
